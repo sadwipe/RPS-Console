@@ -1,31 +1,34 @@
-const button = document.querySelector(".play"); // button that starts the game.
-button.addEventListener('click', game);
-
-const CHOICES = ["rock", "paper", "scissors"]; // every possible choice.
+const button = document.querySelector(".play");
+const CHOICES = ["rock", "paper", "scissors"];
+const defaultMessage = "Choose between rock, paper and scissors!";
+const wrongMessage = "You misspelled a word, try again!";
 let playerPoints = 0, computerPoints = 0, ties = 0;
 
-function getComputerChoice() { // gets a random choice from array.
-    return CHOICES[Math.floor(Math.random() * 3)];
+function getComputerChoice() {
+    return (CHOICES[Math.floor(Math.random() * 3)]);
 }
 
-function getPlayerChoice() { // returns player choice.
-    let playerChoice = prompt("Choose between rock, paper or scissors!");
-    while (playerChoice == null || playerChoice == "") {
-        playerChoice = prompt("Choose between rock, paper or scissors!");
+function getPlayerChoice() {
+    let playerChoice = prompt(defaultMessage);
+    if(playerChoice == null || playerChoice == "") {
+        let playerChoice = prompt(defaultMessage);
     }
     playerChoice = playerChoice.toLowerCase();
-    if (verifyInput(playerChoice)) {
+    let check = validateInput(playerChoice);
+    if(check) {
+        return playerChoice;
+    } else {
+        while(!check) {
+            alert(wrongMessage);
+            playerChoice = prompt(defaultMessage);
+            check = validateInput(playerChoice);
+        }
         return playerChoice;
     }
 }
 
-function verifyInput(input) { // verifies the input, if wrong it invokes getPlayerChoice.
-    if (input == "rock" || input == "paper" || input   == "scissors") {
-        return true;
-    } else {
-        alert("You misspelled a word, try again!");
-        getPlayerChoice();
-    }
+function validateInput(input) {
+    return CHOICES.includes(input);
 }
 
 function playRound(player, computer) { // plays a round
@@ -60,3 +63,5 @@ function game() { // plays the game 5 times and displays the score.
     computerPoints = 0;
     ties = 0;
 }
+
+button.addEventListener('click', game);
