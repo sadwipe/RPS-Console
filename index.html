@@ -5,15 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RPS-Console</title>
-    <link rel="icon" type="image/x-icon" href="/RPS-Console/images/icons8-game-controller-48.png">
-    <link rel="stylesheet" href="/RPS-Console/style.css">
-    <script src="/RPS-Console/script.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="/images/icons8-game-controller-48.png">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
 </head>
 <body>
+    <div class="header">
+        <div class="title">
+            Rock Paper Scissors
+        </div>
+    </div>
     <div class="container">
-        <div class="title">Rock Paper Scissors</div>
-        <div class="message">Enter the console using Option + ⌘ + J (macOS) or Shift + CTRL + I (Windows/Linux)</div>
-        <button class="play">Play</button>
+    <div class="score-table">
+        <div class="player">
+            <div class="player-name">
+                Player Score
+            </div>
+            <div class="player-score">
+                0
+            </div>
+        </div>
+        <div class="computer">
+            <div class="computer-name">
+                Computer Score
+            </div>
+            <div class="computer-score">
+                0
+            </div>
+        </div>
+    </div>
+    <div class="results">
+        <img src="/images/rock-image.png" alt="" class="player-image">
+        <div class="quote">
+            What do you wanna play?
+        </div>
+        <img src="/images/rock-image.png" alt="" class="computer-image">
+    </div>
+    <div class="player-choices">
+        <button class="choice" value="rock">rock</button>
+        <button class="choice" value="paper">paper</button>
+        <button class="choice" value="scissors">scissors</button>
+    </div>
+    </div>
+    <div class="preview">
+        <button class="start">
+            Start
+        </button>
     </div>
 </body>
 </html>
