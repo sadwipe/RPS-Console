@@ -1,72 +1,92 @@
-const COMPUTERCHOICES = ["rock", "paper", "scissors"];
-const startButton = document.querySelector(".start");
-const preview = document.querySelector(".preview") // front page
-const container = document.querySelector(".container"); // page after clicking start
-const choices = document.querySelectorAll(".choice"); // player choices (buttons)
-const quote = document.querySelector(".quote");
+const everyChoice = ["rock", "paper", "scissors"];
+const startButton = document.querySelector(".startButton"); // "Start" first button.
+const container = document.querySelector(".container"); // the content that appears after the "Start" button is pressed.
 const playerImage = document.querySelector(".player-image");
 const computerImage = document.querySelector(".computer-image");
-const computerScore = document.querySelector(".computer-score");
+const choices = document.querySelectorAll(".choice"); // the buttons.
+const score = document.querySelector("#section");
+const conclusion = document.querySelector(".conclusion");
 const playerScore = document.querySelector(".player-score");
-const container2 = document.querySelector("#container2");
-const results = document.querySelector(".results");
+const computerScore = document.querySelector(".computer-score");
+const finalResult = document.querySelector(".final-result");
+const finalScore = document.querySelector("p");
+const winner = document.querySelector(".winner");
+const playAgain = document.querySelector(".playagain");
 
-let pScore = 0;
-let cScore = 0;
-
-function fadeInSmooth(element) { // used only once, after you press the Start button.
-    element.style.cssText = "opacity: 1; pointer-events: all; transition: all 0.5s ease;";
-};
-
-function fadeOut(element) { // used for each image.
-    preview.style.cssText = "opacity: 0; pointer-events: none;";
-};
-
-function fadeIn(element) { // used for each image.
-    element.style.cssText = "opacity: 1; pointer-events: all";
-};
-
-function checkWinner(a, b) {
-
-    playerImage.src = `./images/${a}.png`;
-    computerImage.src = `./images/${b}.png`;
-    fadeIn(playerImage);
-    fadeIn(computerImage);
-
-    if(a == b) {
-        quote.textContent = "It's a tie!";
-    } else if(a == "rock" && b == "scissors" || a == "paper" && b == "rock" || a == "scissors" && b == "paper") {
-        quote.textContent = "You Won!";
-        pScore++;
-    } else {
-        quote.textContent = "You lost!";
-        cScore++;
-    }
-};
+let pScore = 0; // player points.
+let cScore = 0; // computer points.
+let playerChoice = "";
+let computerChoice = "";
 
 function startGame() {
-    startButton.addEventListener('click', () => {
-        fadeOut(preview);
-        fadeInSmooth(container);
-    })
-};
-
-function playRound() {
-    choices.forEach(choice => choice.addEventListener('click', (e) => {
-        let computerChoice = COMPUTERCHOICES[Math.floor(Math.random() * 3)];
-        let playerChoice = e.target.value;
-        checkWinner(playerChoice, computerChoice);
-        playerScore.textContent = pScore;
-        computerScore.textContent = cScore;
-    }));
-};
-
-const game = () => {
-    
-    startGame();
-    playRound();
-    endGame();
+  // for start button.
+  startButton.addEventListener("click", () => {
+    startButton.classList.add("fadeOut");
+    container.classList.remove("fadeOut");
+    container.style.cssText = "transition: .5s ease";
+  });
 }
 
+function updateScore(player, computer) {
+  playerScore.textContent = player;
+  computerScore.textContent = computer;
+}
+
+function checkWinner(a, b) {
+  // verifies the winner and calls the function updateScore.
+  if (
+    (a == "rock" && b == "paper") ||
+    (a == "paper" && b == "scissors") ||
+    (a == "scissors" && b == "rock")
+  ) {
+    cScore++;
+    conclusion.textContent = "Computer won!";
+    conclusion.style.cssText = "color: red;";
+    updateScore(pScore, cScore);
+  } else if (a == b) {
+    conclusion.textContent = "It's a tie!";
+    conclusion.style.cssText = "color: white;";
+  } else {
+    pScore++;
+    conclusion.textContent = "You won!";
+    conclusion.style.cssText = "color: green;";
+    updateScore(pScore, cScore);
+  }
+}
+
+function displayImage(a, b) {
+    playerImage.src = `./images/${a}.png`;
+    computerImage.src = `./images/${b}.png`;
+}
+
+function determineWinner(a, b) {
+    if(a == 5 || b == 5) {
+        container.classList.add("fadeOut");
+        container.style.cssText = "transition: 0;";
+        if(a > b) {
+            winner.textContent = `Player won the game!`;
+        } else {
+            winner.textContent = `Computer won the game!`;
+        }
+        finalScore.textContent = `Final Score: ${a}-${b}`;
+        finalResult.classList.remove("fadeOut");
+        finalResult.style.cssText = "transition: .5s ease";
+        playAgain.classList.remove("fadeOut");
+    }
+}
+
+const game = () => {
+  startGame();
+
+  choices.forEach(choice => choice.addEventListener('click', () => { //gets user & computer choice
+    playerChoice = choice.getAttribute("value");
+    computerChoice = everyChoice[Math.floor(Math.random() * 3)];
+    playerImage.classList.remove("fadeOut");
+    computerImage.classList.remove("fadeOut");
+    displayImage(playerChoice, computerChoice);
+    checkWinner(playerChoice, computerChoice); // plays the game and updates score.
+    determineWinner(pScore, cScore);
+    }));
+};
 
 game();

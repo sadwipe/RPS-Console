@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPS-Console</title>
-    <link rel="icon" type="image/x-icon" href="/images/icons8-game-controller-48.png">
-    <link rel="stylesheet" href="/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
     <script src="/script.js" defer></script>
-</head>
-<body>
+    <title>RPS-UI</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/images/icons8-game-controller-48.png"
+    />
+  </head>
+
+  <body>
     <div class="header">
-        <div class="title">
-            Rock Paper Scissors
-        </div>
+      <div class="title">Rock Paper Scissors</div>
     </div>
-    <div class="container">
-    <div class="score-table">
-        <div class="player">
-            <div class="player-name">
-                Player Score
-            </div>
-            <div class="player-score">
-                0
-            </div>
+
+    <div class="container fadeOut">
+      <div class="score" id="section">
+        <div class="player-section">
+          <div class="player-name">Player</div>
+          <div class="player-score score">0</div>
         </div>
-        <div class="computer">
-            <div class="computer-name">
-                Computer Score
-            </div>
-            <div class="computer-score">
-                0
-            </div>
+        <div class="computer-section">
+          <div class="computer-name">Computer</div>
+          <div class="computer-score score">0</div>
         </div>
+      </div>
+      <div class="results">
+        <img
+          src="/images/rock.png"
+          class="player-image fadeOut"
+          alt=""
+        />
+        <div class="conclusion">Choose what you wanna play!</div>
+        <img
+          src="/images/rock.png"
+          class="computer-image fadeOut"
+          alt="computer-image"
+        />
+      </div>
+
+      <div class="buttons">
+        <button class="choice" value="rock">Rock</button>
+        <button class="choice" value="paper">Paper</button>
+        <button class="choice" value="scissors">Scissors</button>
+      </div>
     </div>
-    <div id="container2">
-        <div class="results">
-            <img src="/images/rock.png" alt="" class="player-image">
-            <div class="quote">
-                What do you wanna play?
-            </div>
-            <img src="/images/rock.png" alt="" class="computer-image">
-        </div>
-        <div class="player-choices">
-            <button class="choice" value="rock">rock</button>
-            <button class="choice" value="paper">paper</button>
-            <button class="choice" value="scissors">scissors</button>
-        </div>
-    </div>
-    </div>
-    <div class="preview">
-        <button class="start">
-            Start
+
+    <div class="preview" >
+        <button class="startButton">
+            Start!
         </button>
     </div>
-</body>
+
+    <div class="final-result fadeOut">
+        <p>Final Score: 2-5</p>
+        <div class="winner">Computer won the game!</div>
+    </div>
+    <div class="playagain fadeOut">
+        <button class="play-again" onClick="window.location.reload();">Play Again!</button>
+    </div>
+  </body>
 </html>
