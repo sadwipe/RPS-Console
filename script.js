@@ -55,38 +55,41 @@ function checkWinner(a, b) {
 }
 
 function displayImage(a, b) {
-    playerImage.src = `./images/${a}.png`;
-    computerImage.src = `./images/${b}.png`;
+  playerImage.src = `./images/${a}.png`;
+  computerImage.src = `./images/${b}.png`;
 }
 
 function determineWinner(a, b) {
-    if(a == 5 || b == 5) {
-        container.classList.add("fadeOut");
-        container.style.cssText = "transition: 0;";
-        if(a > b) {
-            winner.textContent = `Player won the game!`;
-        } else {
-            winner.textContent = `Computer won the game!`;
-        }
-        finalScore.textContent = `Final Score: ${a}-${b}`;
-        finalResult.classList.remove("fadeOut");
-        finalResult.style.cssText = "transition: .5s ease";
-        playAgain.classList.remove("fadeOut");
+  if (a == 5 || b == 5) {
+    container.classList.add("fadeOut");
+    container.style.cssText = "transition: 0;";
+    if (a > b) {
+      winner.textContent = `Player won the game!`;
+    } else {
+      winner.textContent = `Computer won the game!`;
     }
+    finalScore.textContent = `Final Score: ${a}-${b}`;
+    finalResult.classList.remove("fadeOut");
+    finalResult.style.cssText = "transition: .5s ease";
+    playAgain.classList.remove("fadeOut");
+  }
 }
 
 const game = () => {
   startGame();
 
-  choices.forEach(choice => choice.addEventListener('click', () => { //gets user & computer choice
-    playerChoice = choice.getAttribute("value");
-    computerChoice = everyChoice[Math.floor(Math.random() * 3)];
-    playerImage.classList.remove("fadeOut");
-    computerImage.classList.remove("fadeOut");
-    displayImage(playerChoice, computerChoice);
-    checkWinner(playerChoice, computerChoice); // plays the game and updates score.
-    determineWinner(pScore, cScore);
-    }));
+  choices.forEach((choice) =>
+    choice.addEventListener("click", () => {
+      //gets user & computer choice
+      playerChoice = choice.getAttribute("value");
+      computerChoice = everyChoice[Math.floor(Math.random() * 3)];
+      playerImage.classList.remove("fadeOut");
+      computerImage.classList.remove("fadeOut");
+      displayImage(playerChoice, computerChoice);
+      checkWinner(playerChoice, computerChoice); // plays the game and updates score.
+      determineWinner(pScore, cScore);
+    })
+  );
 };
 
 game();
